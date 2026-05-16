@@ -1,0 +1,48 @@
+import random
+import string
+
+def get_character_pool(include_upper, include_lower, include_numbers):
+    characters = ""
+
+    if include_upper.lower() == "yes":
+        characters += string.ascii_uppercase
+
+    if include_lower.lower() == "yes":
+        characters += string.ascii_lowercase
+
+    if include_numbers.lower() == "yes":
+        characters += string.digits
+
+    return characters
+
+
+def generate_password(length, characters):
+    password = ""
+
+    for _ in range(length):
+        password += random.choice(characters)
+
+    return password
+
+
+def main():
+    length = int(input("Enter password length: "))
+
+    include_upper = input("Include uppercase? yes/no: ")
+    include_lower = input("Include lowercase? yes/no: ")
+    include_numbers = input("Include numbers? yes/no: ")
+
+    characters = get_character_pool(include_upper, include_lower, include_numbers)
+
+    if characters == "":
+        print("You must select at least one character type.")
+        return
+
+    password = generate_password(length, characters)
+
+    print("\nGenerated Password:", password)
+    print(f"Password generated with {length} length")
+
+
+if __name__ == "__main__":
+    main()
